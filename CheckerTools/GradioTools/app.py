@@ -2,6 +2,7 @@ import gradio as gr
 
 from .static_str import *
 from .gr_convert_btn import fn_convert
+from .gr_judge_btn import fn_judge
 
 
 # 生成界面的函数（这里只是一个占位符，你需要实现你自己的逻辑）
@@ -34,6 +35,7 @@ with gr.Blocks() as demo:
 
     # 添加按钮事件
     convert_button.click(fn=fn_convert, inputs=[input_box], outputs=[download_file])
+    judge_button.click(fn=fn_judge, inputs=[upload1, upload2], outputs=[result_box])
 
 if __name__=="__main__":
     # 启动Gradio界面服务（开发模式下）
