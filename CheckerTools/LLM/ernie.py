@@ -2,7 +2,17 @@ import erniebot
 import json
 
 class ErnieClass(object):
+    """
+    ErnieBot API封装类
 
+    Args:
+        access_token (str): 用于访问ErnieBot API的access token。
+        api_type (str, optional): 使用的ErnieBot API的类型。默认为"aistudio"。
+
+    Returns:
+        None
+
+    """
     def __init__(self, access_token, api_type="aistudio"):
         erniebot.api_type = 'aistudio'
         erniebot.access_token = access_token
