@@ -4,7 +4,6 @@ import json
 class ErnieClass(object):
 
     def __init__(self, access_token, api_type="aistudio"):
-        super.__init__()
         erniebot.api_type = 'aistudio'
         erniebot.access_token = access_token
 
