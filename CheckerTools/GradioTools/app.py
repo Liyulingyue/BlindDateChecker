@@ -4,16 +4,6 @@ from .static_str import *
 from .gr_convert_btn import fn_convert
 from .gr_judge_btn import fn_judge
 
-
-# 生成界面的函数（这里只是一个占位符，你需要实现你自己的逻辑）
-def dummy_func(text):
-    return "这是你的个人介绍：" + text
-
-
-def dummy_judge(file1, file2):
-    return "判断结果：未知（需要实现判断逻辑）"
-
-
 # 创建Gradio界面
 with gr.Blocks() as demo:
     gr.Markdown(matchmaker_title)
