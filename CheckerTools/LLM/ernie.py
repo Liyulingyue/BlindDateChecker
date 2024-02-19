@@ -19,7 +19,7 @@ class ErnieClass(object):
 
     def get_llm_answer_with_msg(self, msg):
         response = erniebot.ChatCompletion.create(
-            model='ernie-bot',
+            model='ernie-3.5',
             messages=msg,
             top_p=0,
             temperature = 0.1,
@@ -29,7 +29,7 @@ class ErnieClass(object):
 
     def get_llm_answer(self, prompt):
         response = erniebot.ChatCompletion.create(
-            model='ernie-bot',
+            model='ernie-3.5',
             messages=[{'role': 'user', 'content': prompt}],
             top_p=0,
             temperature=0.1,
