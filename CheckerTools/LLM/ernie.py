@@ -14,8 +14,21 @@ class ErnieClass(object):
 
     """
     def __init__(self, access_token, api_type="aistudio"):
-        erniebot.api_type = 'aistudio'
+        erniebot.api_type = api_type
         erniebot.access_token = access_token
+        self.chat_history = []
+
+    def chat(self, prompt, role='user'):
+        self.chat_history.append({'role': role, 'content': prompt})
+        response = erniebot.ChatCompletion.create(
+            model='ernie-3.5',
+            messages=self.chat_history,
+            top_p=0,
+            temperature = 0.1,
+        )
+        result = response.get_result()
+        self.chat_history.append({'role': 'assistant', 'content': result})
+        return result
 
     def get_llm_answer_with_msg(self, msg):
         response = erniebot.ChatCompletion.create(
