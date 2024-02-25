@@ -1,6 +1,8 @@
 from CheckerTools.LLM.ernie import ErnieClass
 from CheckerTools.GradioTools.configure import ernie_access_token
 
+# 该py文件用户实现多轮对话，但是效果不是特别好。
+
 agent_1 = ErnieClass(access_token=ernie_access_token)
 agent_2 = ErnieClass(access_token=ernie_access_token)
 
