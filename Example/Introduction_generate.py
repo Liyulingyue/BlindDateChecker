@@ -92,7 +92,7 @@ while not can_stop:
         .start()
     print("[Survey Agent]: ", question["回复内容"])
     chat_history.extend([
-        {"role": "user", "content": "customer_response"},
+        {"role": "user", "content": customer_response},
         {"role": "assistant", "content": question["回复内容"]}
     ])
     if question["结束判断"]:
