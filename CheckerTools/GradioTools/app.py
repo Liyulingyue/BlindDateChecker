@@ -3,7 +3,7 @@ import gradio as gr
 from .static_str import *
 from .gr_convert_btn import fn_convert
 from .gr_judge_btn import fn_judge, fn_plaintext_judge
-from .gr_agent_helper import init_gr_state, fn_chatbot_input
+from .gr_agent_helper import init_gr_state, fn_chatbot_input, fn_chatbot_reset
 
 # 创建Gradio界面
 with gr.Blocks() as demo:
@@ -50,20 +50,19 @@ with gr.Blocks() as demo:
     with gr.Tab("交互式生成个人评价"):
         gr.Markdown(generation_subtitle)
         agent_state = gr.State(value = init_gr_state())
-        chatbot = gr.Chatbot(
-            label = "历史对话",
-            value = [("hi", "您好，我是相亲信息登记员红娘。非常感谢您选择我们的相亲服务。"
-                             "为了更好地了解您的需求和期望，以便为您推荐更合适的相亲对象，我们需要收集一些您的个人信息。"
-                             "这些信息包括您的姓名、年龄等基本情况，以及您的性格、兴趣爱好、生活习惯等方面的特点。"
-                             "请放心，我们会严格保密您的个人信息。现在，可以请您先简单介绍一下自己吗？")])
+        chatbot = gr.Chatbot(label = chatbot_title, value = [(chatbot_init_value_custom, chatbot_init_value_agent)])
         with gr.Row():
-            chatbot_input_text = gr.Textbox(label="输入您的回复", scale=4)
-            chatbot_input_button = gr.Button(value = "发送", scale=1)
-        chatbot_output_text = gr.Textbox(label="抽取到的个人介绍", info="当结束对话后，可以将这段内容复制到主页面进行加密~")
+            chatbot_input_text = gr.Textbox(label=chatbot_input_text_title, scale=4)
+            chatbot_input_button = gr.Button(value=chatbot_input_button_value, scale=1)
+        with gr.Row():
+            chatbot_output_text = gr.Textbox(label=chatbot_output_text_title, info=chatbot_output_text_info, scale=4)
+            chatbot_reset_button = gr.Button(value=chatbot_reset_button_value, scale=1)
 
         chatbot_input_button.click(fn=fn_chatbot_input,
                                    inputs=[agent_state, chatbot_input_text, chatbot],
                                    outputs=[agent_state, chatbot_input_text, chatbot, chatbot_output_text])
+        chatbot_reset_button.click(fn=fn_chatbot_reset,
+                                   outputs=[agent_state, chatbot, chatbot_input_text, chatbot_output_text])
 
 
 if __name__=="__main__":

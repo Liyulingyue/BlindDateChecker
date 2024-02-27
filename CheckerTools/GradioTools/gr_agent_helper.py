@@ -1,5 +1,6 @@
 import Agently
 from .configure import ernie_access_token
+from .static_str import chatbot_init_value_custom, chatbot_init_value_agent
 
 agent_factory = Agently.AgentFactory()
 
@@ -27,13 +28,8 @@ def init_gr_state():
     state = {
         "can_stop": False,
         "chat_history": [ # 初始化历史信息
-            { "role": "user",
-              "content": "hi"},
-            { "role": "assistant",
-              "content": "您好，我是相亲信息登记员红娘。非常感谢您选择我们的相亲服务。"
-                         "为了更好地了解您的需求和期望，以便为您推荐更合适的相亲对象，我们需要收集一些您的个人信息。"
-                         "这些信息包括您的姓名、年龄等基本情况，以及您的性格、兴趣爱好、生活习惯等方面的特点。"
-                         "请放心，我们会严格保密您的个人信息。现在，可以请您先简单介绍一下自己吗？"}
+            { "role": "user", "content": chatbot_init_value_custom},
+            { "role": "assistant", "content": chatbot_init_value_agent}
         ],
         "customer_information": "",
     }
@@ -100,3 +96,6 @@ def fn_chatbot_input(gr_state, input_text, chat_bot_infor):
     chat_bot_infor.append((customer_response, question["回复内容"]))
 
     return gr_state, "", chat_bot_infor, customer_information
+
+def fn_chatbot_reset():
+    return init_gr_state(), [(chatbot_init_value_custom, chatbot_init_value_agent)], "", ""
